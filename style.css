@@ -247,10 +247,10 @@ li[data-active='true'] {
   background-color: rgba(0, 0, 0, 0.3);
 }
 .loader img {
-  width: 500px;
+  width: 300px;
 }
 .loader.hidden {
-  animation: fadeOut 1s;
+  animation: fadeOut;
   animation-fill-mode: forwards;
 }
 .loader.visible {

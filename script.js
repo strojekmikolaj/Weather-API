@@ -22,10 +22,14 @@ const weatherApp = {
     fetch(`https://api.unsplash.com/search/photos/?query=${city}&client_id=2TAHz5XRgXmpYDrNta4X_RUqGzMDey3U8Fpn5ZMqPj4`)
       .then((response) => response.json())
       .then((response) => {
-        this.loader.className = 'loader hidden';
         const randIdx = Math.floor(Math.random() * response.results.length);
-        const background = document.querySelector('body');
-        background.style.backgroundImage = `url(${response.results[randIdx].urls.full})`;
+        const img = new Image();
+        img.onload = () => {
+          const background = document.querySelector('body');
+          background.style.backgroundImage = `url(${response.results[randIdx].urls.full})`;
+          this.loader.className = 'loader hidden';
+        };
+        img.src = response.results[randIdx].urls.full;
       });
   },
 
