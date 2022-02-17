@@ -1,0 +1,272 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+  font-family: 'Roboto Slab', serif;
+  overflow-x: hidden;
+  background-color: rgb(156, 156, 156);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  background-color: rgba(0, 0, 0, 0.3);
+  margin-top: 200px;
+  padding: 50px;
+  border: solid 3px white;
+  border-radius: 25px;
+}
+.wrapper h1 {
+  font-size: 40px;
+  font-weight: 700;
+  padding-bottom: 10px;
+}
+
+.wrapper .location {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper .location #city {
+  margin-bottom: 10px;
+}
+
+.wrapper .location #submit {
+  font-family: 'Roboto Slab', serif;
+  background-color: transparent;
+  font-size: 18px;
+  border: solid 1px white;
+  border-radius: 11px;
+  color: white;
+  padding: 4px;
+}
+
+.wrapper .location #submit:hover {
+  background-color: white;
+  color: black;
+}
+
+#weather {
+  display: none;
+  grid-template-columns: repeat(5, 1fr);
+  background-color: rgba(0, 0, 0, 0.3);
+  margin-top: 100px;
+  padding: 30px 30px 5px 30px;
+}
+
+#weather h1 {
+  font-size: 30px;
+  font-weight: 700;
+  padding-bottom: 10px;
+}
+
+#weather p {
+  padding-bottom: 7px;
+}
+
+#weather button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background-color: transparent;
+  font-size: 12px;
+  border: solid 1px white;
+  border-radius: 6px;
+  color: white;
+  padding: 3px 7px;
+}
+
+#weather button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+li {
+  box-sizing: border-box;
+  position: relative;
+  padding: 10px;
+  margin: 10px;
+}
+
+li:hover {
+  outline: solid 3px rgb(255, 255, 255, 0.3);
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+li[data-active='true'] {
+  outline: solid 3px rgb(255, 255, 255);
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.loader {
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.loader img {
+  width: 500px;
+}
+.loader.hidden {
+  animation: fadeOut 1s;
+  animation-fill-mode: forwards;
+}
+.loader.visible {
+  animation: fadeIn;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@keyframes fadeIn {
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
