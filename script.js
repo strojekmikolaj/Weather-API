@@ -126,6 +126,7 @@ const weatherApp = {
   },
 
   deleteEntry(e) {
+    e.stopPropagation();
     let weatherStorage = localStorage.getItem('cities');
     weatherStorage = JSON.parse(weatherStorage);
 
