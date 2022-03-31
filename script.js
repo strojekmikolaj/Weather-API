@@ -7,12 +7,14 @@ const weatherApp = {
   },
 
   getLocalFromInput() {
-    this.loader.className += ' visible';
+   
     const city = document.querySelector('#city');
-    if (city.value === 0) {
+    console.log(city.value)
+    if (city.value.trim().length === 0) {
       alert('Please enter city name.');
       return;
     }
+    this.loader.className += ' visible';
     this.weather(city.value, true);
     this.backgroundImage(city.value);
     city.value = '';
@@ -45,6 +47,13 @@ const weatherApp = {
     });
   },
 
+  createHTMLElement(innerText, city, selector = 'p'){
+    const element = document.createElement(selector);
+    element.innerHTML = innerText;
+    element.dataset.city = city;
+    return element;
+  },
+
   weather(city, checkExist) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=dba3cbbbe22de845daba54e9ad2c2c0b&units=metric`)
       .then((response) => response.json())
@@ -67,36 +76,21 @@ const weatherApp = {
         localStorage.setItem('cities', weatherStorage);
 
         this.weatherInfo.style.display = 'grid';
-
+        
         const li = document.createElement('li');
         li.dataset.active = false;
 
-        const name = document.createElement('h1');
-        name.innerHTML = response.name;
-        name.dataset.city = response.name;
-        li.appendChild(name);
+        li.appendChild(this.createHTMLElement(response.name, response.name, 'h1'));
 
-        const iconWrapper = document.createElement('p');
-        iconWrapper.dataset.city = response.name;
+        const iconWrapper = this.createHTMLElement('', response.name);
         const icon = document.createElement('img');
         icon.src = `http://openweathermap.org/img/wn/${response.weather[0].icon}.png`;
         iconWrapper.appendChild(icon);
         li.appendChild(iconWrapper);
 
-        const temperature = document.createElement('p');
-        temperature.innerHTML = `Todays temperature is ${Math.floor(response.main.temp)} degree Celcius.`;
-        temperature.dataset.city = response.name;
-        li.appendChild(temperature);
-
-        const temperatureMin = document.createElement('p');
-        temperatureMin.innerHTML = `Todays minimal temperature is ${Math.floor(response.main.temp_min)} degree Celcius.`;
-        temperatureMin.dataset.city = response.name;
-        li.appendChild(temperatureMin);
-
-        const temperatureMax = document.createElement('p');
-        temperatureMax.innerHTML = `Todays maximum temperature is ${Math.floor(response.main.temp_max)} degree Celcius.`;
-        temperatureMax.dataset.city = response.name;
-        li.appendChild(temperatureMax);
+        li.appendChild(this.createHTMLElement(`Todays temperature is ${Math.floor(response.main.temp)} degree Celcius.`, response.name));
+        li.appendChild(this.createHTMLElement(`Todays minimal temperature is ${Math.floor(response.main.temp_min)} degree Celcius.`, response.name));
+        li.appendChild(this.createHTMLElement(`Todays maximum temperature is ${Math.floor(response.main.temp_max)} degree Celcius.`, response.name));
 
         const deleteButton = document.createElement('button');
         deleteButton.innerHTML = 'X';
@@ -114,11 +108,8 @@ const weatherApp = {
     this.loader.className += ' visible';
     e.target.parentNode.dataset.active = true;
     const elements = document.querySelectorAll('li');
-    // eslint-disable-next-line no-restricted-syntax
     for (const item of elements) {
       if (item.dataset.active === 'true' && item !== e.target.parentNode) {
-        console.log(item);
-        console.log(e.target.parentNode);
         item.dataset.active = false;
       }
     }
